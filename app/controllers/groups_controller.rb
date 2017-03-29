@@ -19,8 +19,6 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-    @group.save
-      redirect_to groups_path
   end
 
   private
