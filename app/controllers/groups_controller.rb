@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user! , only: [:new]
+
 
   def index
     @groups = Group.all
@@ -21,6 +23,11 @@ class GroupsController < ApplicationController
      end
   end
 
+  def edit
+    @group = Group.find(params[:id])
+  end
+
+
   def update
     @group = Group.find(params[:id])
     if @group.update(group_params)
@@ -30,9 +37,6 @@ class GroupsController < ApplicationController
     end
   end
 
-  def edit
-    @group = Group.find(params[:id])
-  end
 
   def destroy
     @group = Group.find(params[:id])
