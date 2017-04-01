@@ -10,7 +10,11 @@ class PostsController < ApplicationController
 
   def new
     @group = Group.find(params[:group_id])
-    @post  = Post.new
+    if current_user && current_user.is_member_of?(@group)
+     @post  = Post.new
+    else
+      redirect_to group_path(@group), notice: "你还不是该群组成员！"
+    end
   end
 
   def create
